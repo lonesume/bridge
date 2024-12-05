@@ -32,11 +32,6 @@ def handle_ping():
     return Response(json.dumps({"message": "pong"}), status=200)
 
 
-@app.route("/")
-def handle_home_route():
-    return send_from_directory(app.static_folder, "index.html")
-
-
 @app.route("/user", methods=["POST"])
 def create_user():
     # print(request.get_json())
@@ -97,8 +92,10 @@ def post_to_open_api():
 # they will be redirected to the react app
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
-def catch_all(path):
-    if path != "" and os.path.exists(app.static_folder + "/" + path):
+def serve_static(path):
+    if path.startswith("api/"):
+        return {"error": "Not Found"}, 404
+    if os.path.exists(os.path.join(app.static_folder, path)):
         return send_from_directory(app.static_folder, path)
     return send_from_directory(app.static_folder, "index.html")
 
