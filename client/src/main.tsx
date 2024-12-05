@@ -1,6 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import "./index.module.css";
+import "./globals.css";
 // import App from './App.tsx'
 // import {ClerkProvider} from "@clerk/clerk-react";
 
