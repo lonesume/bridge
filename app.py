@@ -23,7 +23,7 @@ load_dotenv()
 apiKey = os.environ.get("YN_KEY")
 client = OpenAI(api_key=apiKey)
 
-app = Flask(__name__, static_folder="client/dist", static_url_path="")
+app = Flask(__name__, static_folder="client/dist", static_url_path="/")
 CORS(app)
 
 
@@ -92,12 +92,27 @@ def post_to_open_api():
 # they will be redirected to the react app
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
-def serve_static(path):
-    if path.startswith("api/"):
-        return {"error": "Not Found"}, 404
-    if os.path.exists(os.path.join(app.static_folder, path)):
-        return send_from_directory(app.static_folder, path)
-    return send_from_directory(app.static_folder, "index.html")
+@app.errorhandler(404)
+def catch_all(path):
+    return app.send_static_file("index.html")
+
+
+# @app.route("/", defaults={"path": ""})
+# @app.route("/<path:path>")
+# def serve_static(path):
+#     if path.startswith("api/"):
+#         return {"error": "Not Found"}, 404
+
+#     # For the root path or any other path, try to serve the file if it exists
+#     try:
+#         if path == "":
+#             return send_from_directory(app.static_folder, "index.html")
+#         if os.path.exists(os.path.join(app.static_folder, path)):
+#             return send_from_directory(app.static_folder, path)
+#         return send_from_directory(app.static_folder, "index.html")
+#     except Exception as e:
+#         print(f"Error serving file: {e}")
+#         return send_from_directory(app.static_folder, "index.html")
 
 
 if __name__ == "__main__":
