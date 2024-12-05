@@ -92,5 +92,16 @@ def post_to_open_api():
     return Response(res, status=200, mimetype="application/json")
 
 
+# This must be the last route, this is for react router
+# i.e. if the user goes to /about, /pricing, /contact, etc.
+# they will be redirected to the react app
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def catch_all(path):
+    if path != "" and os.path.exists(app.static_folder + "/" + path):
+        return send_from_directory(app.static_folder, path)
+    return send_from_directory(app.static_folder, "index.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8080)
