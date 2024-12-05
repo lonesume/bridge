@@ -1,12 +1,11 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
+import "./index.module.css";
 // import App from './App.tsx'
 // import {ClerkProvider} from "@clerk/clerk-react";
 
 // import React from 'react'
 // import ReactDOM from 'react-dom/client'
-import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // Import the layouts
