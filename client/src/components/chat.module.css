@@ -1,0 +1,148 @@
+.chatPage {
+  padding-top: 80px;
+  min-height: 100vh;
+  background-color: #242424;
+}
+
+.chatContainer {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2.5rem 3.5rem;
+  background-color: rgba(30, 30, 30, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.chatTitle {
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.chatForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+.chatInputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 100%;
+}
+
+.chatLabel {
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-left: 0.25rem;
+}
+
+.chatInput {
+  width: 100%;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.chatInput:focus {
+  outline: none;
+  border-color: #646cff;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.chatInput::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.chatButtonContainer {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.chatButton {
+  flex: 1;
+  padding: 0.875rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.chatButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #646cff;
+}
+
+.chatButton.primary {
+  background-color: #646cff;
+  border-color: #646cff;
+}
+
+.chatButton.primary:hover {
+  background-color: #535bf2;
+}
+
+.chatButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chatResponseGroup {
+  margin-top: 1rem;
+}
+
+.chatTextarea {
+  width: 100%;
+  min-height: 200px;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.5;
+  resize: vertical;
+  transition: all 0.3s ease;
+}
+
+.chatTextarea:focus {
+  outline: none;
+  border-color: #646cff;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.chatTextarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+  .chatContainer {
+    margin: 2rem 1rem;
+    padding: 1.5rem;
+  }
+  
+  .chatButtonContainer {
+    flex-direction: column;
+  }
+  
+  .chatButton {
+    width: 100%;
+  }
+} 
