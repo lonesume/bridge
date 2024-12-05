@@ -4,7 +4,9 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  /* font-family: Arial, sans-serif; */
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro",
+    "Helvetica Neue", Inter, Arial, sans-serif;
   background-color: #f8f9fa;
 }
 
