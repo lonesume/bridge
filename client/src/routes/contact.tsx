@@ -2,6 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useUser } from "@clerk/clerk-react";
 
 type ContactFormData = { name: string; email: string; message: string };
+
 export default function ContactPage() {
   const {
     register,
@@ -26,77 +27,85 @@ export default function ContactPage() {
   const userEmail = user?.emailAddresses[0].emailAddress || "";
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl mt-16">
-      <h1 className="text-4xl font-bold text-center mb-8 text-white">
-        Contact Us
-      </h1>
+    <div className="pt-20 min-h-screen bg-[#242424]">
+      <div className="max-w-3xl mx-auto my-8 p-10 bg-[rgba(30,30,30,0.95)] rounded-2xl shadow-2xl backdrop-blur-lg">
+        <h1 className="text-white text-3xl mb-8 text-center font-semibold">
+          Contact Us
+        </h1>
 
-      <div className="flex flex-col md:flex-row items-center gap-8 bg-black rounded-xl p-8 border border-indigo-500">
-        {/* Text Container */}
-        <div className="md:w-1/2">
-          <p className="text-xl text-gray-200 leading-relaxed">
+        <div className="flex flex-col gap-8 px-4">
+          <p className="text-white text-lg leading-relaxed">
             Questions? Feel free to reach out.
           </p>
-        </div>
 
-        {/* Form Container */}
-        <div className="md:w-1/2">
-          {" "}
           <form
             onSubmit={handleSubmit(onSubmit)}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "flex-start",
-            }}
-            className="gap-2"
+            className="flex flex-col gap-6"
           >
-            <label htmlFor="name" className="text-xl">
-              {" "}
-              Name{" "}
-            </label>
-            <input
-              defaultValue={fullName}
-              id="name"
-              type="text"
-              {...register("name", { required: true })}
-              className="w-80 h-8"
-            />
-            {errors.name && (
-              <p className="text-red-500">This field is required</p>
-            )}
-            <label htmlFor="email" className="text-xl">
-              {" "}
-              Email{" "}
-            </label>
-            <input
-              defaultValue={userEmail}
-              id="email"
-              type="text"
-              {...register("email", { required: true })}
-              className="w-80 h-8"
-            />
-            {errors.email && (
-              <p className="text-red-500">This field is required</p>
-            )}
-            <label htmlFor="message" className="text-xl">
-              {" "}
-              Message{" "}
-            </label>
-            <textarea
-              id="message"
-              {...register("message", { required: true })}
-              className="w-80 h-36"
-            />
-            {errors.message && (
-              <p className="text-red-500">This field is required</p>
-            )}
+            <div className="flex flex-col gap-2">
+              <label className="text-white text-sm font-medium ml-1">
+                Name
+              </label>
+              <input
+                defaultValue={fullName}
+                {...register("name", { required: true })}
+                className="w-full p-4 bg-white/5 border border-white/10 rounded-lg text-white 
+                         placeholder-white/30 focus:outline-none focus:border-[#646cff] 
+                         focus:bg-white/8 transition-all duration-300"
+                placeholder="Your name"
+              />
+              {errors.name && (
+                <p className="text-red-500 text-sm ml-1">
+                  This field is required
+                </p>
+              )}
+            </div>
 
-            <input
+            <div className="flex flex-col gap-2">
+              <label className="text-white text-sm font-medium ml-1">
+                Email
+              </label>
+              <input
+                defaultValue={userEmail}
+                {...register("email", { required: true })}
+                className="w-full p-4 bg-white/5 border border-white/10 rounded-lg text-white 
+                         placeholder-white/30 focus:outline-none focus:border-[#646cff] 
+                         focus:bg-white/8 transition-all duration-300"
+                placeholder="your.email@example.com"
+              />
+              {errors.email && (
+                <p className="text-red-500 text-sm ml-1">
+                  This field is required
+                </p>
+              )}
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-white text-sm font-medium ml-1">
+                Message
+              </label>
+              <textarea
+                {...register("message", { required: true })}
+                className="w-full min-h-[200px] p-4 bg-white/5 border border-white/10 rounded-lg 
+                         text-white placeholder-white/30 focus:outline-none focus:border-[#646cff] 
+                         focus:bg-white/8 transition-all duration-300 resize-y"
+                placeholder="Your message..."
+              />
+              {errors.message && (
+                <p className="text-red-500 text-sm ml-1">
+                  This field is required
+                </p>
+              )}
+            </div>
+
+            <button
               type="submit"
-              className="text-xl bg-indigo-600 p-1 rounded-md"
-            />
+              className="w-full py-3.5 px-6 rounded-lg bg-[#646cff] border border-[#646cff] 
+                       text-white text-sm font-medium cursor-pointer transition-all duration-300
+                       hover:bg-[#535bf2] disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Send Message
+            </button>
           </form>
         </div>
       </div>

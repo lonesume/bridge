@@ -1,9 +1,6 @@
 import { useState } from "react";
-import styles from "./chat.module.css";
 
 const FLASK_URL = "http://localhost:8080";
-// const FLASK_URL = 'https://yn-translator.onrender.com/chat';
-// Function to simulate the gradual typing of the response
 
 const Chat = () => {
   const [content, setContent] = useState("");
@@ -19,7 +16,6 @@ const Chat = () => {
     } catch (e) {
       alert(e);
     }
-
     setIsLoading(false);
   };
 
@@ -32,17 +28,12 @@ const Chat = () => {
       return;
     }
 
-    const data = {
-      content: content,
-      role: role,
-    };
+    const data = { content, role };
 
     try {
       const response = await fetch(`${FLASK_URL}/api/chat`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
@@ -57,34 +48,39 @@ const Chat = () => {
 
     setIsLoading(false);
   };
+
   function typeResponseGradually(message: string) {
-    setResponse(""); // Clear any previous text
+    setResponse("");
     let index = -1;
-    const speed = 50; // Speed of typing effect in milliseconds
+    const speed = 50;
 
     function typeChar() {
       if (index < message.length) {
-        setResponse((prev) => {
-          return prev + message.charAt(index);
-        });
+        setResponse((prev) => prev + message.charAt(index));
         index++;
-        setTimeout(typeChar, speed); // Recursively call to add the next character
+        setTimeout(typeChar, speed);
       }
     }
 
-    typeChar(); // Start the typing effect
+    typeChar();
   }
 
   return (
-    <div className={styles.chatPage}>
-      <div className={styles.chatContainer}>
-        <h1 className={styles.chatTitle}>AI Chat Interface</h1>
+    <div className="pt-20 min-h-screen bg-[#242424]">
+      <div className="max-w-3xl mx-auto my-8 p-10 bg-[rgba(30,30,30,0.95)] rounded-2xl shadow-2xl backdrop-blur-lg">
+        <h1 className="text-white text-3xl mb-8 text-center font-semibold">
+          AI Chat Interface
+        </h1>
 
-        <div className={styles.chatForm}>
-          <div className={styles.chatInputGroup}>
-            <label className={styles.chatLabel}>Content</label>
+        <div className="flex flex-col gap-8 px-4">
+          <div className="flex flex-col gap-2">
+            <label className="text-white text-sm font-medium ml-1">
+              Content
+            </label>
             <input
-              className={styles.chatInput}
+              className="w-full p-4 bg-white/5 border border-white/10 rounded-lg text-white 
+                       placeholder-white/30 focus:outline-none focus:border-[#646cff] 
+                       focus:bg-white/8 transition-all duration-300"
               type="text"
               placeholder="Type your message here..."
               value={content}
@@ -92,10 +88,12 @@ const Chat = () => {
             />
           </div>
 
-          <div className={styles.chatInputGroup}>
-            <label className={styles.chatLabel}>Role</label>
+          <div className="flex flex-col gap-2">
+            <label className="text-white text-sm font-medium ml-1">Role</label>
             <input
-              className={styles.chatInput}
+              className="w-full p-4 bg-white/5 border border-white/10 rounded-lg text-white 
+                       placeholder-white/30 focus:outline-none focus:border-[#646cff] 
+                       focus:bg-white/8 transition-all duration-300"
               type="text"
               placeholder="e.g., Helpful Assistant, Teacher, Expert..."
               value={role}
@@ -103,9 +101,12 @@ const Chat = () => {
             />
           </div>
 
-          <div className={styles.chatButtonContainer}>
+          <div className="flex gap-4 mt-4 md:flex-row flex-col">
             <button
-              className={styles.chatButton}
+              className="flex-1 py-3.5 px-6 border border-white/10 rounded-lg bg-white/5 
+                       text-white text-sm font-medium cursor-pointer transition-all duration-300
+                       hover:bg-white/10 hover:border-[#646cff] disabled:opacity-50 
+                       disabled:cursor-not-allowed"
               onClick={onPing}
               disabled={isLoading}
             >
@@ -113,7 +114,9 @@ const Chat = () => {
             </button>
 
             <button
-              className={`${styles.chatButton} ${styles.primary}`}
+              className="flex-1 py-3.5 px-6 rounded-lg bg-[#646cff] border border-[#646cff] 
+                       text-white text-sm font-medium cursor-pointer transition-all duration-300
+                       hover:bg-[#535bf2] disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={submitData}
               disabled={isLoading}
             >
@@ -121,10 +124,14 @@ const Chat = () => {
             </button>
           </div>
 
-          <div className={styles.chatResponseGroup}>
-            <label className={styles.chatLabel}>Response</label>
+          <div className="flex flex-col gap-2 mt-4">
+            <label className="text-white text-sm font-medium ml-1">
+              Response
+            </label>
             <textarea
-              className={styles.chatTextarea}
+              className="w-full min-h-[200px] p-4 bg-white/5 border border-white/10 rounded-lg 
+                       text-white placeholder-white/30 focus:outline-none focus:border-[#646cff] 
+                       focus:bg-white/8 transition-all duration-300 resize-y"
               readOnly
               value={response}
               placeholder="AI response will appear here..."
